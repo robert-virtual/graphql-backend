@@ -7,6 +7,8 @@ import { createServer } from 'http'
 import fs from 'fs'
 const prisma = new PrismaClient()
 
+console.log('ready to deploy');
+
 interface params {
   typeDefs: DocumentNode
   resolvers: any
@@ -40,10 +42,20 @@ const resolvers = {
   Query: {
     async books() {
       return await prisma.book.findMany()
+    },
+    async authors(_parent: any, _args: any, _ctx: any, _info: any) {
+      return await prisma.author.findMany()
+    },
+    async book(_: any, { id }: { id: string }) {
+      return await prisma.book.findUnique({ where: { id } })
+    },
+    async author(_: any, { id }: { id: string }) {
+      return await prisma.author.findUnique({ where: { id } })
     }
   },
   Mutation: {
     async addBook(_parent: any, args: any, _ctx: any, _info: any) {
+      args.book.year = new Date(args.book.year).toTimeString()
       let book = await prisma.book.create({ data: args.book })
       return book
     },

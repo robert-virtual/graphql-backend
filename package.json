@@ -2,11 +2,11 @@
   "name": "graph-ql-app",
   "version": "1.0.0",
   "description": "",
-  "main": "src/app.ts",
+  "main": "dist/app.js",
   "scripts": {
-    "watch": "tsc -w src/app.ts",
-    "dev": "nodemon dist/app.js",
-    "start": "node dist/app.js"
+    "watch": "tsc -w",
+    "dev": "nodemon .",
+    "start": "tsc && node ."
   },
   "keywords": [],
   "author": "",
