@@ -6,6 +6,8 @@
   "scripts": {
     "watch": "tsc -w",
     "dev": "nodemon .",
+    "tsc":"tsc",
+    "postinstall":"npm run tsc",
     "start": "tsc && node ."
   },
   "keywords": [],
